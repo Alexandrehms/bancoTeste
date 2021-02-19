@@ -1,0 +1,46 @@
+package entidades;
+
+public class ContaPoupanca extends Conta{
+
+	
+	private Double taxa;
+	
+	
+	public ContaPoupanca() {
+		super();
+	}
+	
+
+	public ContaPoupanca(String nome, Integer agencia, Integer conta, Double saldo, Double taxa) {
+		super(nome, agencia, conta, saldo);
+		this.taxa = taxa;
+	}
+
+	
+	@Override
+	public double saque(double montante) {
+		return saldo -= montante;
+	}
+
+	public double rendimento(double montante) {
+		return saldo += montante + taxa;
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Conta Poupança, Nome: "
+				
+				
+				+ getNome()
+				+ ", Agencia "
+				+ getAgencia()
+				+ ", Conta Poupança "
+				+ getConta()
+				+ ", Saldo "
+				+ String.format("%.2f", saldo)
+				+ ", Valor com da taxa: "
+				+ taxa;
+	}
+
+	}
