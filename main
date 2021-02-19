@@ -1,0 +1,174 @@
+package app;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+import entidades.Conta;
+import entidades.ContaEmpresa;
+import entidades.ContaPoupanca;
+
+public class Programa {
+
+	
+	public static void main(String[] args) {
+	
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		List<Conta> lista = new ArrayList<>();
+		List<ContaPoupanca> listaP = new ArrayList<>();
+		List<ContaEmpresa> listaE = new ArrayList<>();
+		
+		int total = 0;
+		int totalP = 0;
+		int totalE = 0;
+		int continuar;
+		do {
+		System.out.println("Digite");
+		System.out.println("1 para conta Corrente:");
+		System.out.println("2 para conta Poupança:");
+		System.out.println("3 para conta Empresa:");
+		int tipo = sc.nextInt();
+		
+		System.out.print("Nome do titular: ");
+		String nome = sc.next();
+		System.out.print("Agência: ");
+		int agencia = sc.nextInt();
+		System.out.print("Conta: ");
+		int conta = sc.nextInt();
+		System.out.print("Saldo: ");
+		double saldo = sc.nextDouble();
+		
+		
+		if (tipo == 1) {
+			
+			Conta cc = new Conta(nome, agencia, conta, saldo);
+			System.out.println("Operações da conta corrente");
+			System.out.println("Digite");
+			System.out.println("1 para Saque");
+			System.out.println("2 para Deposito");
+			int operacao = sc.nextInt();
+				
+			
+			if (operacao == 1) {
+				System.out.print("Valor do Saque: ");
+				int saque = sc.nextInt();
+				cc.saque(saque);
+			}
+			if (operacao == 2) {
+				System.out.print("Valor do Deposito: ");
+				int deposito = sc.nextInt();
+				cc.deposito(deposito);
+			}
+			
+			
+			lista.add(cc);
+			total++;
+			System.out.println(cc);
+		}
+		
+		if (tipo ==2 ) {
+			
+			System.out.println("Qual o valor da taxa de rendimento; ");
+			double taxa = sc.nextDouble();
+			
+			ContaPoupanca cp = new ContaPoupanca(nome, agencia, conta, saldo, taxa);
+			System.out.println("Operações da conta Poupança");
+			System.out.println("Digite");
+			System.out.println("1 para Saque");
+			System.out.println("2 para Deposito com rendimento");
+			
+			int operacao = sc.nextInt();
+				
+			
+			if (operacao == 1) {
+				System.out.print("Valor do Saque: ");
+				int saque = sc.nextInt();
+				cp.saque(saque);
+				
+			}
+			if (operacao == 2) {
+				System.out.print("Valor do Deposito: ("+ taxa + "): ");
+				int rendimento = sc.nextInt();
+				cp.rendimento(rendimento);
+			}
+			System.out.println(cp);
+			listaP.add(cp);
+			totalP++;
+		}
+		if (tipo == 3 ) {
+			
+			System.out.println("Operações da conta Empresa");
+			System.out.print("Qual o valor de limite de emprestimo: ");
+			double limiteEmprestimo = sc.nextDouble();
+	
+			ContaEmpresa ce = new ContaEmpresa(nome, agencia, conta, saldo, limiteEmprestimo);
+		
+			System.out.println("Digite");
+			System.out.println("1 para Saque");
+			System.out.println("2 para Deposito");
+			System.out.println("3 para Emprestimo");
+			
+			int operacao = sc.nextInt();
+		
+	
+			if (operacao == 1) {
+				System.out.print("Valor do Saque: ");
+				int saque = sc.nextInt();
+				ce.saque(saque);
+			}
+			if (operacao == 2) {
+				System.out.print("Valor do deposito: ");
+				int deposito = sc.nextInt();
+				ce.deposito(deposito);
+			}
+			if (operacao == 3) {
+				System.out.print("Valor do emprestimo ("+ limiteEmprestimo + "): ");
+				int emprestimo = sc.nextInt();
+				ce.emprestimo(emprestimo);
+		}
+		
+			
+			System.out.println(ce);
+	
+			listaE.add(ce);
+			totalE++;
+		}
+		
+		System.out.println("Digite");
+		System.out.println("1 para Novo cadastro");
+		System.out.println("2 para Encerrar");
+		
+		continuar = sc.nextInt();
+		
+		
+		}while (continuar == 1);
+		
+		System.out.println("Obrigado por usar nosso banco!");	
+	
+	for (Conta banco : lista ) {
+		
+		System.out.println("Atualizado: " + banco.toString());
+		System.out.println("Total de contas: " + total);
+		
+	}
+	
+	System.out.println("--------------------");
+	for (Conta bancoP: listaP){
+		System.out.println("Atualizado: " + bancoP.toString());
+		System.out.println("Total de contas POUPANÇA: " + totalP);
+	}
+
+	System.out.println("--------------------");
+	for (Conta bancoE: listaE){
+		System.out.println("Atualizado: " + bancoE.toString());
+		System.out.println("Total de contas EMPRESA: " + totalE);
+	}
+	
+	sc.close();
+		}
+
+}
+	
