@@ -1,0 +1,60 @@
+package entidades;
+
+public class ContaEmpresa extends Conta {
+	
+	private Double limiteEmprestimo;
+	
+	public ContaEmpresa() {
+		super();
+	}
+
+	public ContaEmpresa(Double limiteEmprestimo) {
+		super();
+		this.limiteEmprestimo = limiteEmprestimo;
+	}
+
+	
+
+	public ContaEmpresa(String nome, Integer agencia, Integer conta, Double saldo, Double limiteEmprestimo) {
+		super(nome, agencia, conta, saldo);
+		this.limiteEmprestimo = limiteEmprestimo;
+	}
+
+
+
+	public Double getLimiteEmprestimo() {
+		return limiteEmprestimo;
+	}
+
+	public void setLimiteEmprestimo(Double limiteEmprestimo) {
+		this.limiteEmprestimo = limiteEmprestimo;
+	}
+
+	public void emprestimo(double montante) {
+		
+		if (montante <= limiteEmprestimo) {
+			saldo += montante;
+			System.out.println("ai sim");
+		}
+		else {
+			System.out.println("Limite insuficiente! ");
+			
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Conta Empresa, Nome: "
+				+ getNome()
+				+ ", Agencia " 
+				+ getAgencia()
+				+ ", Conta: "
+				+ getConta()
+				+ ", Saldo: "
+				+ String.format("%.2f", saldo)
+				+ ", Limite de emprestimo: "
+				+ limiteEmprestimo;
+}
+	
+	
+}
